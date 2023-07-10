@@ -12,7 +12,7 @@
     />
 
     <div>
-      <q-btn label="Vložit" type="submit" color="negative" />
+      <q-btn label="Vložit" type="submit" color="negative" unelevated />
       <q-btn
         label="Obnovit"
         type="reset"
