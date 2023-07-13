@@ -1,6 +1,6 @@
 <template>
   <q-list>
-    <div v-for="song in songsStore.songs" :key="song.title">
+    <div v-for="song in songsStore.activeSongs" :key="song.title">
       <q-item>
         <q-item-section>
           <SongCard
@@ -15,15 +15,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onBeforeMount } from 'vue';
-import { Song } from 'src/models';
 import SongCard from 'src/components/SongCard.vue';
 import { useSongsStore } from 'src/stores/songs';
-
-interface Props {
-  color?: string;
-}
-const props = withDefaults(defineProps<Props>(), {});
 
 const songsStore = useSongsStore();
 </script>

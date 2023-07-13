@@ -1,6 +1,6 @@
 <template>
   <q-card flat bordered class="my-card">
-    <q-card-section>
+    <q-card-section v-if="styleStore.showTitle">
       <div class="text-h6">{{ props.title }}</div>
     </q-card-section>
 
@@ -8,7 +8,7 @@
       <div v-for="(chordNotation, index) in chordNotations" :key="index">
         <div class="row">
           <div class="col-1">
-            <q-btn-group push class="float-left">
+            <q-btn-group push class="float-left" v-if="styleStore.showButtons">
               <div v-if="index === 0">
                 <q-btn
                   color="green"
@@ -37,11 +37,17 @@
               </div>
             </q-btn-group>
           </div>
-          <div class="col-9 text-weight-bold text-h6">
+          <div
+            class="col-9 text-weight-bold text-h6"
+            v-if="styleStore.showButtons"
+          >
+            {{ chordNotation }}
+          </div>
+          <div class="col-12 text-weight-bold text-h6" v-else>
             {{ chordNotation }}
           </div>
           <div class="col-2">
-            <q-btn-group push class="float-right">
+            <q-btn-group push class="float-right" v-if="styleStore.showButtons">
               <q-btn
                 color="white"
                 text-color="black"
@@ -76,9 +82,12 @@
       </div>
     </q-card-section>
 
-    <q-separator inset v-if="props.lyrics" />
+    <q-separator inset v-if="props.lyrics && styleStore.showLyrics" />
 
-    <q-card-section v-if="props.lyrics" style="white-space: normal">
+    <q-card-section
+      v-if="props.lyrics && styleStore.showLyrics"
+      style="white-space: normal"
+    >
       <div class="text-weight-regular text-body1" style="width: inherit">
         <div
           v-for="(line, index) of props.lyrics.split('\n')"
@@ -93,6 +102,7 @@
 
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
+import { useStyleStore } from 'src/stores/style';
 import { ref, Ref, defineComponent, watch, onMounted } from 'vue';
 import { Dictionary, Token } from 'src/models';
 
@@ -105,12 +115,14 @@ interface Props {
   defaultChordNotation: string;
   lyrics?: string;
 }
-const props = withDefaults(defineProps<Props>(), {});
+const props = defineProps<Props>();
+
 const chordNotations: Ref<string[]> = ref([]);
+
+const styleStore = useStyleStore();
 
 onMounted(() => {
   chordNotations.value.push(validateChords(props.defaultChordNotation));
-  console.log(props.lyrics);
 });
 
 watch(

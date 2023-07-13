@@ -5,8 +5,12 @@
         <song-list></song-list>
       </div>
     </div>
-    <q-separator size="50px" color="white"></q-separator>
-    <div class="row">
+    <div class="row q-pt-sm">
+      <div class="col">
+        <song-picker></song-picker>
+      </div>
+    </div>
+    <div class="row q-pt-sm">
       <div class="col">
         <song-loader></song-loader>
       </div>
@@ -17,5 +21,6 @@
 <script setup lang="ts">
 import SongList from 'components/SongList.vue';
 import SongLoader from 'components/SongLoader.vue';
+import SongPicker from 'src/components/SongPicker.vue';
 import { ref } from 'vue';
 </script>

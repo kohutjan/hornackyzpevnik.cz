@@ -5,13 +5,28 @@ import { XMLParser } from 'fast-xml-parser';
 
 export const useSongsStore = defineStore('songs', {
   state: () => ({
-    songs: <Song[]>[],
+    allSongSets: <Map<string, Song[]>>new Map(),
+    activeSetNames: <Set<string>>new Set(),
+    activeSongs: <Song[]>[],
   }),
   actions: {
-    load(xml: string) {
+    loadSongSet(xml: string): string {
       const parser = new XMLParser();
       const parsedXML = parser.parse(xml);
-      this.songs = parsedXML.songs.song;
+      this.allSongSets.set(parsedXML.set.name, parsedXML.set.song);
+      return parsedXML.set.name;
+    },
+
+    setActiveSongSets(names: string[]) {
+      this.activeSetNames.clear();
+      this.activeSongs = [];
+      names.forEach((name) => {
+        const songs = this.allSongSets.get(name);
+        if (songs) {
+          this.activeSetNames.add(name);
+          this.activeSongs = this.activeSongs.concat(songs);
+        }
+      });
     },
   },
 });

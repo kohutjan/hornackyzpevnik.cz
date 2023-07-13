@@ -4,7 +4,7 @@
       filled
       borderless
       v-model="xml"
-      label="XML záznam písniček"
+      label="XML záznam sady"
       lazy-rules
       type="textarea"
       :rules="[(val) => (val && val.length > 0) || '']"
@@ -38,7 +38,8 @@ const $q = useQuasar();
 
 // prettier-ignore
 const xml: Ref<string|null> = ref(
-  '<songs>\n'+
+  '<set>\n'+
+  '  <name>Sada</name>\n' +
   '  <song>\n'+
   '   <title>Sedlácká 1</title>\n' +
   '   <chords>C|D|E|F|G|A|B|H|C</chords>\n' +
@@ -54,7 +55,7 @@ const xml: Ref<string|null> = ref(
   '   <chords>C|d|E|f|G|a|B|h|C</chords>\n' +
   '   <lyrics>Text táhlé...</lyrics>\n' +
   ' </song>\n' +
-  '</songs>');
+  '</set>');
 
 const songsStore = useSongsStore();
 
@@ -67,7 +68,8 @@ function onSubmit() {
       message: 'Neplatné XML.',
     });
   } else {
-    songsStore.load(xml.value);
+    const setName = songsStore.loadSongSet(xml.value);
+    songsStore.setActiveSongSets([setName]);
     $q.notify({
       color: 'green-4',
       textColor: 'white',

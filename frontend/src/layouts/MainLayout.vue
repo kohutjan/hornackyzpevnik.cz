@@ -1,8 +1,13 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header class="bg-negative text-white" height-hint="98">
+    <q-header
+      class="bg-negative text-white"
+      height-hint="98"
+      reveal
+      :reveal-offset="0"
+    >
       <q-toolbar>
-        <!--<q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />-->
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title> Horňácký zpěvník </q-toolbar-title>
       </q-toolbar>
@@ -16,10 +21,15 @@
       -->
     </q-header>
 
-    <!--
-    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
+    <q-drawer
+      show-if-above
+      v-model="leftDrawerOpen"
+      side="left"
+      bordered
+      :width="160"
+    >
+      <song-style></song-style>
     </q-drawer>
-    -->
 
     <q-page-container>
       <router-view />
@@ -27,19 +37,13 @@
   </q-layout>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref } from 'vue';
+import SongStyle from 'src/components/SongStyle.vue';
 
-export default {
-  setup() {
-    const leftDrawerOpen = ref(false);
+const leftDrawerOpen = ref(false);
 
-    return {
-      leftDrawerOpen,
-      toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value;
-      },
-    };
-  },
-};
+function toggleLeftDrawer() {
+  leftDrawerOpen.value = !leftDrawerOpen.value;
+}
 </script>
