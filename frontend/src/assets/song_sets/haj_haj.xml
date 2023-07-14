@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<set>
+<name>Háj háj</name>
+<song>
+  <title>Háj, háj, zelené oreší</title>
+  <chords>||:A|DA|H|EA:||||:AEAA|AEAA|AH|EA:|| </chords>
+  <lyrics>
+    ||: Háj, háj, háj, háj, zelené oreší. :|| ||: Kdo mi moje srdelenko, kdo mi len potěší :||
+    ||: Háj, háj, háj, háj, zelená ohánka. :|| ||: Či si bola, či nebola, si moja galánka :||
+  </lyrics>
+</song>
+
+<song>
+  <title>Seděl vrabec na kostele</title>
+  <chords>a|a|a|a|DG|C|E|a</chords>
+</song>
+
+<song>
+  <title>Ej, povedz, povedz</title>
+  <chords>D|D|D|DA|A|A|A|AD</chords>
+</song>
+
+<song>
+  <title>Janko masár</title>
+  <chords>A|A|A|A|E|A|A|D|D|H|H|E</chords>
+</song>
+
+<song>
+  <title>Podkověnky moje</title>
+  <chords>AD|AD|G|G|AD|D|D|A|A|A|A|D</chords>
+</song>
+
+</set>
